@@ -1,0 +1,105 @@
+package server;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+
+import shared.SampleDataObject;
+import shared.TextRequest;
+import shared.TextResponse;
+
+public class ServerThread extends Thread {
+	
+	MultiServer parent;
+	Socket socket;
+	ObjectOutputStream out;
+	ObjectInputStream in;
+	boolean loggingEnabled = true;
+	int loggingPriority = 2;
+	int id;
+	String name;
+	
+	public ServerThread(MultiServer parent, Socket socket) throws IOException {
+		log("Thread started.",2);
+		
+		// set up local variables
+		this.parent = parent;
+		this.socket = socket;
+		
+		// add self to multiServer
+		id = parent.addClient(this);
+		
+		log("Got client ID: " + Integer.toString(id),2);
+		
+		//set up output /  input streams
+		log("Starting output stream...",5);
+		out = new ObjectOutputStream(socket.getOutputStream());
+		log("Starting input stream...",5);
+		in  = new ObjectInputStream(socket.getInputStream());
+		
+		// login stuff
+		log("Sending login prompt: ",2);
+		name = textAsk("login", "Enter name: ");
+		
+		String answer = textAsk("question", "A basic question? ");
+		log(answer, 1);
+		
+		
+		log("Beginning while loop...",5);
+		Object input;
+		try {
+			boolean exit = false;
+			while(((input = in.readObject()) != null) && !exit) {
+				if (input instanceof SampleDataObject) {
+					SampleDataObject obj = (SampleDataObject) input;
+					log(obj.date.toString(),1);
+					exit = true;
+				}
+				if (input.toString().equals("Bye.")) {
+					exit = true;
+				}
+			}
+			log("Removing myself (ID #" + Integer.toString(id) + ")",2);
+			parent.removeClient(this);
+			out.close();
+			in.close();
+			socket.close();
+			log("Terminated successfully.",2);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void log(String message, int priority) {
+		if (loggingEnabled && (priority <= loggingPriority)) {
+			System.out.println("ServerThread #" + Long.toString(this.getId()) + ": " + 
+					message);
+		}
+	}
+	
+	/**
+	 * Prompts the client for information.
+	 * @param channel
+	 * @param prompt
+	 * @return
+	 */
+	public String textAsk(String channel, String prompt) {
+		log(prompt,3);
+		try {
+			out.writeObject(new TextRequest(channel, prompt));
+			Object nameresp = in.readObject();
+			if(nameresp instanceof TextResponse) {
+				String response = ((TextResponse) nameresp).text;
+				log("Got answer: " + response,2);
+				return response;
+			}
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+}
