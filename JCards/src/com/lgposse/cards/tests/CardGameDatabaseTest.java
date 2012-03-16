@@ -13,9 +13,9 @@ public class CardGameDatabaseTest {
 	
 	@Test
 	public void test() {
-		d= CardGameDatabaseTest.exampleCardGameDatabase();
+		//d= CardGameDatabaseTest.exampleCardGameDatabase();
 		//listGetAndUpdateTest();
-		populateDatabaseWithSampleGames(15);
+		//populateDatabaseWithSampleGames(15);
 	}
 	
 	/**
@@ -50,9 +50,9 @@ public class CardGameDatabaseTest {
 		}
 	}
 	
-	public static CardGameDatabase exampleCardGameDatabase() {
-		CardGameDatabase d = new CardGameDatabase("instance7519.db.xeround.com", 5720, "cards", "lgpadmin", "rootbeer");
-		return d;
-	}
+	//public static CardGameDatabase exampleCardGameDatabase() {
+		
+		//return d;
+	//}
 
 }

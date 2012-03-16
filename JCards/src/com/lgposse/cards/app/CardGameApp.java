@@ -16,7 +16,7 @@ public class CardGameApp extends GameApp {
 	
 	public CardGameApp(GameContainer container) {
 		super(container);
-		database = CardGameDatabaseTest.exampleCardGameDatabase(); // TODO: make a real database extension
+		//database = CardGameDatabaseTest.exampleCardGameDatabase(); // TODO: make a real database extension
 	}
 
 	@Override
