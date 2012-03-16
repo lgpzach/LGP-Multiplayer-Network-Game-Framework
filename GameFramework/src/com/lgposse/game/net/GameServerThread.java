@@ -23,6 +23,8 @@ public class GameServerThread extends ServerThread {
 		if(o instanceof Game) {
 			Game game = (Game) o;
 			parent.games.put(game.name, game);
+			System.out.println("Game updated: " + game.name);
+			this.parent.broadcastObject(new GameList(this.parent.games.values()));
 		}
 		else if(o instanceof TextRequest) {
 			TextRequest req = (TextRequest) o;

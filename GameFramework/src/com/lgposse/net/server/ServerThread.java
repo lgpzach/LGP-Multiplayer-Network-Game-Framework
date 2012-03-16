@@ -62,8 +62,9 @@ public abstract class ServerThread extends Thread implements ObjectListener {
 				}
 			}
 		} catch (ClassNotFoundException | IOException e) {
-			//e.printStackTrace();
+			e.printStackTrace();
 		}
+		close();
 	}
 	
 	public void sendObject(Serializable obj) {

@@ -15,7 +15,7 @@ public class CardGameLobbyControl extends LobbyControl {
 	@Override
 	protected void createGame(String gameName) {
 		CardGame cardGame = new CardGame(gameName);
-		gameApp.gotGame(cardGame);
+		gameApp.netControl.sendGame(cardGame);
 	}
 
 }

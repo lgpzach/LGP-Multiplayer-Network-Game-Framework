@@ -3,6 +3,7 @@ package com.lgposse.game.database;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 
 import com.lgposse.game.models.Game;
 
@@ -15,6 +16,10 @@ public class GameList implements Serializable {
 		this.games = new ArrayList<Game>();
 	}
 	
+	public GameList(Collection<Game> games) {
+		this.games = new ArrayList<Game>(games);
+	}
+
 	public String toString() {
 		String out = "";
 		for(Game g : this.games) {

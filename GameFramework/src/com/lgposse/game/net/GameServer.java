@@ -1,6 +1,7 @@
 package com.lgposse.game.net;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -36,6 +37,12 @@ public class GameServer extends MultiServer {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+
+	public void broadcastObject(Serializable obj) {
+		for(ServerThread s : clients) {
+			s.sendObject(obj);
 		}
 	}
 
