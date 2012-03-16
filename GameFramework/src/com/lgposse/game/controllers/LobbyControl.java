@@ -17,7 +17,6 @@ public abstract class LobbyControl extends GameListView implements MouseListener
 	public LobbyControl(GameApp gameApp) {
 		super(new GameList());
 		this.gameApp = gameApp;
-		this.requestGameList();
 		initializeComponents();
 	}
 	

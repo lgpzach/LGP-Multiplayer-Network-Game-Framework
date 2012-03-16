@@ -3,7 +3,6 @@ package com.lgposse.cards.app;
 import com.lgposse.cards.controllers.CardGameControl;
 import com.lgposse.cards.controllers.CardGameLobbyControl;
 import com.lgposse.cards.models.CardGame;
-import com.lgposse.cards.tests.CardGameDatabaseTest;
 import com.lgposse.game.app.GameApp;
 import com.lgposse.game.app.GameContainer;
 import com.lgposse.game.models.Game;
@@ -23,6 +22,7 @@ public class CardGameApp extends GameApp {
 	public void gotPlayer(Player player) {
 		this.player = player;
 		this.lobbyControl = new CardGameLobbyControl(this);
+		this.lobbyControl.requestGameList();
 		this.gameContainer.setActiveComponent(this.lobbyControl);
 	}
 

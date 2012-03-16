@@ -56,10 +56,7 @@ public abstract class GameApp implements Runnable, ObjectListener {
 		if(o instanceof Game) this.gotGame((Game) o);
 		else if(o instanceof GameList) {
 			GameList gameList = (GameList) o;
-			System.out.println("gamelist: " + gameList);
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {}
+			System.out.println(this.lobbyControl);
 			this.lobbyControl.gotGameList(gameList);
 		}
 		else if(o instanceof Player) this.gotPlayer((Player) o);
