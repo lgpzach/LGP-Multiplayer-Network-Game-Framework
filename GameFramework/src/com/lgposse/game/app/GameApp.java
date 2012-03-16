@@ -7,7 +7,6 @@ import com.lgposse.game.database.GameList;
 import com.lgposse.game.models.Game;
 import com.lgposse.game.models.Player;
 import com.lgposse.game.net.NetControl;
-import com.lgposse.game.net.NewGameList;
 import com.lgposse.net.common.ObjectListener;
 
 /**
@@ -40,6 +39,7 @@ public abstract class GameApp implements Runnable, ObjectListener {
 		this.gameContainer = gameContainer;
 		this.playerControl = new PlayerControl(this);
 		this.gameContainer.setActiveComponent(this.playerControl);
+		this.netControl = new NetControl(this, "localhost", 36777);
 	}
 
 	public void run() {
@@ -54,7 +54,14 @@ public abstract class GameApp implements Runnable, ObjectListener {
 	public void gotObject(Object o) {
 		// set to phase out database
 		if(o instanceof Game) this.gotGame((Game) o);
-		else if(o instanceof GameList) this.lobbyControl.gotGameList((GameList) o);
+		else if(o instanceof GameList) {
+			GameList gameList = (GameList) o;
+			System.out.println("gamelist: " + gameList);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {}
+			this.lobbyControl.gotGameList(gameList);
+		}
 		else if(o instanceof Player) this.gotPlayer((Player) o);
 	}
 }

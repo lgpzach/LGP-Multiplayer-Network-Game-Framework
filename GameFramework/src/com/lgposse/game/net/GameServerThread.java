@@ -3,7 +3,6 @@ package com.lgposse.game.net;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Collection;
 
 import com.lgposse.game.database.GameList;
 import com.lgposse.game.models.Game;
@@ -35,7 +34,7 @@ public class GameServerThread extends ServerThread {
 				}
 				break;
 			case "gamelistrequest":
-				NewGameList gameList = new NewGameList();
+				GameList gameList = new GameList();
 				gameList.games = new ArrayList<Game>(parent.games.values());
 				this.sendObject(gameList);
 				break;

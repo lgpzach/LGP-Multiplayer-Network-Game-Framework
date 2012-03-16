@@ -18,11 +18,6 @@ public class NetControl implements ObjectListener {
 		client.start();
 	}
 	
-	public NetControl(String host) {
-		client = new Client(this, host, 36777);
-		client.start();
-	}
-	
 	public void requestGameList() {
 		client.sendObject(new TextRequest("gamelistrequest"));
 	}
@@ -48,7 +43,8 @@ public class NetControl implements ObjectListener {
 	
 	@Override
 	public void gotObject(Object o) {
-		System.out.println((Game) o);
+		System.out.println(o);
+		app.gotObject(o);
 	}
 
 	public void close() {

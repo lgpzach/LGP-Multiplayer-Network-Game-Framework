@@ -7,7 +7,6 @@ import javax.swing.JOptionPane;
 
 import com.lgposse.game.app.GameApp;
 import com.lgposse.game.database.GameList;
-import com.lgposse.game.net.NewGameList;
 import com.lgposse.game.views.GameListView;
 
 public abstract class LobbyControl extends GameListView implements MouseListener {
@@ -16,9 +15,14 @@ public abstract class LobbyControl extends GameListView implements MouseListener
 	protected GameApp gameApp;
 
 	public LobbyControl(GameApp gameApp) {
-		super(new GameList(gameApp.database));
+		super(new GameList());
 		this.gameApp = gameApp;
+		this.requestGameList();
 		initializeComponents();
+	}
+	
+	public void requestGameList() {
+		gameApp.netControl.requestGameList();
 	}
 
 	private void initializeComponents() {
@@ -37,8 +41,9 @@ public abstract class LobbyControl extends GameListView implements MouseListener
 
 	protected abstract void createGame(String gameName);
 	
-	public void gotGameList(GameList o) {
-		this.gameList = o;
+	public void gotGameList(GameList list) {
+		this.gameList = list;
+		this.update();
 	}
 	
 	@Override

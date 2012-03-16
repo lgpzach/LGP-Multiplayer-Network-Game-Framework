@@ -1,25 +1,18 @@
 package com.lgposse.game.database;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.lgposse.game.models.Game;
 
-public class GameList {
-	public GameDatabase gameDatabase;
+public class GameList implements Serializable {
+
+	private static final long serialVersionUID = 8050447185512807994L;
 	public ArrayList<Game> games;
-	
-	public GameList(GameDatabase gameDatabase) {
-		this.gameDatabase = gameDatabase;
-		this.update();
-	}
 	
 	public GameList() {
 		this.games = new ArrayList<Game>();
-	}
-	
-	public void update() {
-		games = gameDatabase.getAllGames();
 	}
 	
 	public String toString() {

@@ -55,14 +55,16 @@ public class GameListView extends JPanel implements View, ListSelectionListener 
 		btnCreateGame = new JButton("Create Game");
 		btnCreateGame.setFont(Fonts.LOBBY_BUTTON);
 		btnCreateGame.setBackground(Colors.LIGHT_BLUE);
-		btnCreateGame.setForeground(Color.white);
+		btnCreateGame.setForeground(Color.BLACK);
 		
 		listPanel.setLayout(new BorderLayout());
 		listPanel.add(games, BorderLayout.CENTER);
 		listPanel.add(btnCreateGame, BorderLayout.SOUTH);
 	}
 	
-	public void update() {}
+	public void update() {
+		games.setListData(gameList.toArray());
+	}
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
