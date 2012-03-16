@@ -1,4 +1,4 @@
-package com.lgposse.game.net;
+package com.lgposse.game.net.server;
 
 import java.io.IOException;
 import java.net.Socket;
