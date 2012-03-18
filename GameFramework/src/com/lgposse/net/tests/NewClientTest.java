@@ -16,10 +16,15 @@ public class NewClientTest implements ObjectListener {
 	}
 	
 	public void run() {
-		Client c = new Client(this, "localhost", 36777);
-		c.start();
-		ExampleGame g = new ExampleGame("test");
-		c.sendObject(g);
+		Client c;
+		try {
+			c = new Client(this, "localhost", 36777);
+			c.start();
+			ExampleGame g = new ExampleGame("test");
+			c.sendObject(g);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

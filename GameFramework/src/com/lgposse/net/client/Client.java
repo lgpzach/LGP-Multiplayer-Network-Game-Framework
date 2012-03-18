@@ -6,7 +6,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.Socket;
 import java.net.SocketException;
-
 import com.lgposse.net.common.ObjectListener;
 
 /**
@@ -21,15 +20,11 @@ public class Client extends Thread {
 	protected ObjectOutputStream out;
 	protected ObjectInputStream in;
 	
-	public Client(ObjectListener listener, String host, int port) {
+	public Client(ObjectListener listener, String host, int port) throws Exception {
 		this.listener = listener;
-		try {
-			socket = new Socket(host, port);
-			out = new ObjectOutputStream(socket.getOutputStream());
-			in = new ObjectInputStream(socket.getInputStream());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		socket = new Socket(host, port);
+		out = new ObjectOutputStream(socket.getOutputStream());
+		in = new ObjectInputStream(socket.getInputStream());
 	}
 	
 	public void sendObject(Serializable obj) {

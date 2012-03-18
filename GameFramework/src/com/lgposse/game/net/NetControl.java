@@ -12,7 +12,7 @@ public class NetControl implements ObjectListener {
 	protected Client client;
 	protected GameApp app;
 	
-	public NetControl(GameApp app, String host, int port) {
+	public NetControl(GameApp app, String host, int port) throws Exception {
 		this.app = app;
 		client = new Client(this, host, port);
 		client.start();

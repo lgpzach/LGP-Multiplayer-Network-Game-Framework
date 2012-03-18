@@ -36,10 +36,15 @@ public abstract class GameApp implements Runnable, ObjectListener {
 	public NetControl netControl; // set to phase out database
 	
 	public GameApp(GameContainer gameContainer) {
-		this.gameContainer = gameContainer;
-		this.playerControl = new PlayerControl(this);
-		this.gameContainer.setActiveComponent(this.playerControl);
-		this.netControl = new NetControl(this, "localhost", 36777);
+		try {
+			this.netControl = new NetControl(this, "localhost", 36777);
+			this.gameContainer = gameContainer;
+			this.playerControl = new PlayerControl(this);
+			this.gameContainer.setActiveComponent(this.playerControl);
+		} catch(Exception e) {
+			System.err.println("Could not connect to host.");
+			System.exit(1);
+		}
 	}
 
 	public void run() {
@@ -56,7 +61,6 @@ public abstract class GameApp implements Runnable, ObjectListener {
 		if(o instanceof Game) this.gotGame((Game) o);
 		else if(o instanceof GameList) {
 			GameList gameList = (GameList) o;
-			System.out.println(this.lobbyControl);
 			this.lobbyControl.gotGameList(gameList);
 		}
 		else if(o instanceof Player) this.gotPlayer((Player) o);

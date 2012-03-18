@@ -30,7 +30,6 @@ public abstract class DesktopContainer extends JFrame implements GameContainer, 
 	@Override
 	public void setActiveComponent(Component comp) {
 		panel.add(comp, comp.getName());
-		System.out.println(comp.getName());
 		cardLayout.show(panel, comp.getName());
 	}
 }
