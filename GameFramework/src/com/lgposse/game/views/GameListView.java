@@ -28,7 +28,6 @@ public class GameListView extends JPanel implements View, ListSelectionListener 
 	protected JPanel nullInfoPanel;
 	protected GameInfoView infoPanel;
 	
-	
 	protected JList<String> games;
 	protected JButton btnCreateGame;
 	
@@ -41,6 +40,7 @@ public class GameListView extends JPanel implements View, ListSelectionListener 
 		nullInfoPanel = new NullInfoPanel();
 		
 		splitPane = new  JSplitPaneWithZeroSizeDivider(JSplitPane.HORIZONTAL_SPLIT);
+		splitPane.setDividerLocation(200);
 		splitPane.setRightComponent(nullInfoPanel);
 		splitPane.setLeftComponent(listPanel);
 		this.initializeListPanel();

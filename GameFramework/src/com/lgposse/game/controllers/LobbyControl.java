@@ -33,7 +33,8 @@ public abstract class LobbyControl extends GameListView implements MouseListener
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if(e.getSource() == btnCreateGame) {
-			String gameName = JOptionPane.showInputDialog("Game name? ", gameApp.player.name + "'s game");
+			String name = gameApp.player.name.toString() + "'s game";
+			String gameName = JOptionPane.showInputDialog("Game name? ", name);
 			this.createGame(gameName);
 		}
 	}

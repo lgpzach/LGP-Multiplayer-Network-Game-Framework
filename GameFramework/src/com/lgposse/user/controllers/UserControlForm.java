@@ -182,9 +182,10 @@ public class UserControlForm extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
     
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    	if((txtLoginPassword.toString() != "") &&
-    			txtRegisterUsername.toString() != "" && txtRegisterPassword.toString() != "" && txtRegisterEmail.toString() != "") {
-    		userControl.loginUser(txtLoginUsername.toString(), txtLoginPassword.toString());
+    	//if((txtLoginPassword.getPassword() != null) &&
+    	//		txtLoginUsername.getText() != "") {
+    	if(txtLoginUsername.getText() != "") {
+    		userControl.loginUser(txtLoginUsername.getText(), txtLoginPassword.getText());
     	} else {
     		JOptionPane.showMessageDialog(this, "No username or password.");
     	}
