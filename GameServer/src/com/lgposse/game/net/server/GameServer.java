@@ -36,7 +36,7 @@ public class GameServer extends MultiServer {
 				new GameServerThread(this, server.accept()).start();
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 
